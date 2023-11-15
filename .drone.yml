@@ -15,8 +15,11 @@ steps:
   settings:
     dockerfile: Dockerfile
     debug: true
-    repo: conekta/go-ci
+    repo: registry:5000/conekta/go-ci
+    registry: registry:5000
     cache_from: golang:1.13
+    autotag: no
+    insecure: yes
     tags:
       - latest
       - main
@@ -31,7 +34,7 @@ steps:
     PLUGIN_PURGE: "false"
   depends_on:
     - "build"
-    
+
 - name: test
   image: docker:dind
   volumes:
@@ -48,6 +51,10 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
+- name: registry
+  image: registry
+  settings:
+    insecure: true
 
 volumes:
 - name: dockersock
