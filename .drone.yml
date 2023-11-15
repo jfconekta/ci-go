@@ -8,7 +8,7 @@ steps:
   image: golang:1.13
   commands:
     - "go build -o ./myapp"
-- name: docker
+- name: docker-build
   image: plugins/docker
   privileged: true
   settings:
