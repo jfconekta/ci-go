@@ -12,20 +12,14 @@ steps:
   image: plugins/docker
   privileged: true
   settings:
-    target: builder
     dockerfile: Dockerfile
     debug: true
-    repo: conekta/logs-service
+    repo: conekta/go-ci
     cache_from: golang:1.13
     tags:
       - latest
       - main
-  environment:
-    PLUGIN_SSH_AGENT_KEY:
-      from_secret: SSH_KEY
-    DOCKER_BUILDKIT: 0
-    PLUGIN_DRY_RUN: "true"
-    PLUGIN_PURGE: "false"
+    dry_run: false
 - name: test
   image: docker:dind
   volumes:
