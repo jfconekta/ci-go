@@ -48,7 +48,10 @@ steps:
   image: registry:5000/conekta/go-ci:main
   depends_on:
     - "docker-build"
-  
+  commands:
+  - sleep 10
+  - ls /
+    
 services:
 - name: docker
   image: docker:dind
