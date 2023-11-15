@@ -1,72 +1,25 @@
 ---
 kind: pipeline
+type: kubernetes
 name: default
 
-
 steps:
-- name: build
-  image: golang:1.13
-  commands:
-    - "go build -o ./myapp"
-
-- name: docker-build
-  image: plugins/docker
-  privileged: true
-  settings:
-    dockerfile: Dockerfile
-    debug: true
-    repo: conekta/go-ci
-    cache_from: golang:1.13
-    tags:
-      - latest
-      - main
+- name: test
+  image: docker:dind
   volumes:
   - name: dockersock
     path: /var/run
-  environment:
-    PLUGIN_SSH_AGENT_KEY:
-      from_secret: SSH_KEY
-    DOCKER_BUILDKIT: 0
-    PLUGIN_DRY_RUN: "true"
-    PLUGIN_PURGE: "false"
-    DOCKER_HOST: "unix:///drone/docker.sock"
-  depends_on:
-    - "build"
-
-- name: appgo
-  image: docker
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
-  environment:
-    DOCKER_HOST: "unix:///drone/docker.sock"
   commands:
   - sleep 5 # give docker enough time to start
-  - docker images
-  - docker run -p3000:3000 conekta/go-ci:main
-  depends_on:
-    - "docker-build"
-  detach: true
-
-- name: test
-  image: praqma/network-multitool
-  commands:
-  - sleep 15 # give docker enough time to start
-  - curl "http://appgo:3000"
-  depends_on:
-    - "appgo"
+  - docker ps -a
 
 services:
 - name: docker
   image: docker:dind
-  command: [ '-H', 'unix:///drone/docker.sock' ]
   privileged: true
   volumes:
   - name: dockersock
     path: /var/run
-
-
 
 volumes:
 - name: dockersock
