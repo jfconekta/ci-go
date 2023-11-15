@@ -19,6 +19,9 @@ steps:
     tags:
       - latest
       - main
+  volumes:
+  - name: dockersock
+    path: /var/run
   environment:
     PLUGIN_SSH_AGENT_KEY:
       from_secret: SSH_KEY
@@ -26,7 +29,7 @@ steps:
     PLUGIN_DRY_RUN: "true"
     PLUGIN_PURGE: "false"
 - name: test
-  image: conekta/go-ci:main
+  image: docker:dind
   volumes:
   - name: dockersock
     path: /var/run
