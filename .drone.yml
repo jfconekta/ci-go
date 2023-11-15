@@ -46,12 +46,15 @@ steps:
 
 - name: runapp
   image: registry:5000/conekta/go-ci:main
+  settings:
+    insecure: true
+    registry: registry:5000
   depends_on:
     - "docker-build"
   commands:
   - sleep 10
   - ls /
-    
+
 services:
 - name: docker
   image: docker:dind
