@@ -16,7 +16,7 @@ steps:
     dockerfile: Dockerfile
     debug: true
     repo: conekta/logs-service
-    cache_from: golang:1.19.1-alpine
+    cache_from: golang:1.13
     tags:
       - latest
       - main
