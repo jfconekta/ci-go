@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-#type: kubernetes
+type: kubernetes
 name: default
 
 steps:
@@ -55,6 +55,7 @@ steps:
   commands:
   - sleep 10
   - ls /  
+  
 services:
 - name: docker
   image: docker:dind
