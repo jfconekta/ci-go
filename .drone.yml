@@ -44,7 +44,6 @@ steps:
 
 - name: runapp
   image: registry:5000/conekta/go-ci:main
-  image: docker
   privileged: true
   volumes:
   - name: dockersock
