@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-type: kubernetes
+#type: kubernetes
 name: default
 
 steps:
@@ -49,9 +49,9 @@ steps:
   settings:
     insecure: true
     registry: registry:5000
+    repo: registry:5000/conekta/go-ci
   depends_on:
     - "docker-build"
-
   commands:
   - sleep 10
   - ls /  
@@ -66,6 +66,7 @@ services:
   image: registry
   settings:
     insecure: true
+    
 
 volumes:
 - name: dockersock
