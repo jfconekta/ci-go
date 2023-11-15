@@ -35,7 +35,7 @@ steps:
   - sleep 5 # give docker enough time to start
   - curl "localhost:3000"
   depends_on:
-    - "docker"
+    - "app-go"
 
 
 
@@ -46,7 +46,7 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
-- name: test
+- name: app-go
   image: docker:dind
   volumes:
   - name: dockersock
