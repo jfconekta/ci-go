@@ -44,6 +44,11 @@ steps:
   - sleep 5 # give docker enough time to start
   - docker ps -a
 
+- name: runapp
+  image: registry:5000/conekta/go-ci:main
+  depends_on:
+    - "docker-build"
+  
 services:
 - name: docker
   image: docker:dind
