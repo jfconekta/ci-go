@@ -19,7 +19,12 @@ steps:
     tags:
       - latest
       - main
-    dry_run: false
+  environment:
+    PLUGIN_SSH_AGENT_KEY:
+      from_secret: SSH_KEY
+    DOCKER_BUILDKIT: 0
+    PLUGIN_DRY_RUN: "true"
+    PLUGIN_PURGE: "false"
 - name: test
   image: docker:dind
   volumes:
