@@ -41,8 +41,7 @@ steps:
   commands:
   - sleep 5 # give docker enough time to start
   - docker images
-  - docker run -p3000:3000 -d conekta/go-ci:main
-  - docker ps
+  - docker run -p3000:3000 conekta/go-ci:main
   depends_on:
     - "docker-build"
   detach: true
@@ -54,8 +53,6 @@ steps:
   - curl "http://appgo:3000"
   depends_on:
     - "appgo"
-
-
 
 services:
 - name: docker
