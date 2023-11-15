@@ -27,11 +27,10 @@ steps:
   - name: dockersock
     path: /var/run
   environment:
-    PLUGIN_SSH_AGENT_KEY:
-      from_secret: SSH_KEY
     DOCKER_BUILDKIT: 0
     PLUGIN_DRY_RUN: "false"
     PLUGIN_PURGE: "false"
+    insecure: "true"
   depends_on:
     - "build"
 
@@ -55,7 +54,7 @@ steps:
   commands:
   - sleep 10
   - ls /  
-  
+
 services:
 - name: docker
   image: docker:dind
