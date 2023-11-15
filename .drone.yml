@@ -33,9 +33,7 @@ steps:
     - "build"
 
 - name: appgo
-  image: docker:dind
-  settings:
-    cache_from: conekta/go-ci:main
+  image: docker
   privileged: true
   volumes:
   - name: dockersock
