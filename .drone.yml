@@ -32,7 +32,7 @@ steps:
   depends_on:
     - "build"
 
-- name: app-go
+- name: appgo
   image: docker:dind
   privileged: true
   volumes:
@@ -51,9 +51,9 @@ steps:
   image: praqma/network-multitool
   commands:
   - sleep 15 # give docker enough time to start
-  - curl "http://app-go:3000"
+  - curl "http://appgo:3000"
   depends_on:
-    - "app-go"
+    - "appgo"
 
 
 
