@@ -30,7 +30,7 @@ steps:
     PLUGIN_SSH_AGENT_KEY:
       from_secret: SSH_KEY
     DOCKER_BUILDKIT: 0
-    PLUGIN_DRY_RUN: "true"
+    PLUGIN_DRY_RUN: "false"
     PLUGIN_PURGE: "false"
   depends_on:
     - "build"
