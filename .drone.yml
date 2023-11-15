@@ -51,10 +51,10 @@ steps:
     registry: registry:5000
   depends_on:
     - "docker-build"
+
   commands:
   - sleep 10
-  - ls /
-
+  - ls /  
 services:
 - name: docker
   image: docker:dind
