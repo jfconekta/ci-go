@@ -34,12 +34,13 @@ steps:
 
 - name: app-go
   image: docker:dind
+  privileged: true
   volumes:
   - name: dockersock
     path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
-  - docker run -p3000:3000 conekta/go-ci:latest
+  - docker run -p3000:3000 conekta/go-ci:main
   depends_on:
     - "docker-build"
 
