@@ -4,6 +4,28 @@ name: default
 
 
 steps:
+- name: build
+  image: golang:1.13
+  commands:
+    - "go build -o ./myapp"
+- name: docker
+  image: plugins/docker
+  privileged: true
+  settings:
+    target: builder
+    dockerfile: Dockerfile
+    debug: true
+    repo: conekta/logs-service
+    cache_from: golang:1.19.1-alpine
+    tags:
+      - latest
+      - main
+  environment:
+    PLUGIN_SSH_AGENT_KEY:
+      from_secret: SSH_KEY
+    DOCKER_BUILDKIT: 1
+    PLUGIN_DRY_RUN: "true"
+    PLUGIN_PURGE: "false"
 - name: test
   image: docker:dind
   volumes:
