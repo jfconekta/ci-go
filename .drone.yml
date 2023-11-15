@@ -31,6 +31,18 @@ steps:
     PLUGIN_PURGE: "false"
   depends_on:
     - "build"
+
+- name: app-go
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run
+  commands:
+  - sleep 5 # give docker enough time to start
+  - docker run -p3000:3000 conekta/go-ci:latest
+  depends_on:
+    - "docker-build"
+
 - name: test
   image: praqma/network-multitool
   commands:
@@ -48,16 +60,7 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
-- name: app-go
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run
-  commands:
-  - sleep 5 # give docker enough time to start
-  - docker run -p3000:3000 conekta/go-ci:latest
-  depends_on:
-    - "docker-build"
+
 
 
 volumes:
