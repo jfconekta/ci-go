@@ -19,7 +19,7 @@ steps:
     registry: registry:5000
     cache_from: golang:1.13
     autotag: no
-    insecure: yes
+    insecure: true
     tags:
       - latest
       - main
@@ -30,7 +30,6 @@ steps:
     DOCKER_BUILDKIT: 0
     PLUGIN_DRY_RUN: "false"
     PLUGIN_PURGE: "false"
-    insecure: "true"
   depends_on:
     - "build"
 
