@@ -4,6 +4,34 @@ type: kubernetes
 name: default
 
 steps:
+- name: build
+  image: golang:1.13
+  commands:
+    - "go build -o ./myapp"
+
+- name: docker-build
+  image: plugins/docker
+  privileged: true
+  settings:
+    dockerfile: Dockerfile
+    debug: true
+    repo: conekta/go-ci
+    cache_from: golang:1.13
+    tags:
+      - latest
+      - main
+  volumes:
+  - name: dockersock
+    path: /var/run
+  environment:
+    PLUGIN_SSH_AGENT_KEY:
+      from_secret: SSH_KEY
+    DOCKER_BUILDKIT: 0
+    PLUGIN_DRY_RUN: "true"
+    PLUGIN_PURGE: "false"
+  depends_on:
+    - "build"
+    
 - name: test
   image: docker:dind
   volumes:
