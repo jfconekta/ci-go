@@ -28,14 +28,16 @@ steps:
     DOCKER_BUILDKIT: 0
     PLUGIN_DRY_RUN: "true"
     PLUGIN_PURGE: "false"
+
 - name: test
-  image: conekta/go-ci:main
-  volumes:
-  - name: dockersock
-    path: /var/run
+  image: praqma/network-multitool
   commands:
   - sleep 5 # give docker enough time to start
-  - curl localhost:3000
+  - curl "localhost:3000"
+  depends_on:
+    - "docker"
+
+
 
 services:
 - name: docker
@@ -44,6 +46,17 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
+- name: test
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run
+  commands:
+  - sleep 5 # give docker enough time to start
+  - docker run -p3000:3000 conekta/go-ci:latest
+  depends_on:
+    - "docker"
+
 
 volumes:
 - name: dockersock
