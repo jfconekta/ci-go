@@ -49,7 +49,7 @@ steps:
   image: praqma/network-multitool
   commands:
   - sleep 5 # give docker enough time to start
-  - curl "localhost:3000"
+  - curl "app-go:3000"
   depends_on:
     - "app-go"
 
