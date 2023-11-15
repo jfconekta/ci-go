@@ -23,7 +23,7 @@ steps:
   environment:
     PLUGIN_SSH_AGENT_KEY:
       from_secret: SSH_KEY
-    DOCKER_BUILDKIT: 1
+    DOCKER_BUILDKIT: 0
     PLUGIN_DRY_RUN: "true"
     PLUGIN_PURGE: "false"
 - name: test
@@ -33,7 +33,7 @@ steps:
     path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
-  - docker ps -a
+  - docker images
 
 services:
 - name: docker
