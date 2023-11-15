@@ -8,6 +8,7 @@ steps:
   image: golang:1.13
   commands:
     - "go build -o ./myapp"
+
 - name: docker-build
   image: plugins/docker
   privileged: true
@@ -28,7 +29,8 @@ steps:
     DOCKER_BUILDKIT: 0
     PLUGIN_DRY_RUN: "true"
     PLUGIN_PURGE: "false"
-
+  depends_on:
+    - "build"
 - name: test
   image: praqma/network-multitool
   commands:
@@ -55,7 +57,7 @@ services:
   - sleep 5 # give docker enough time to start
   - docker run -p3000:3000 conekta/go-ci:latest
   depends_on:
-    - "docker"
+    - "docker-build"
 
 
 volumes:
