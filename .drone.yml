@@ -43,7 +43,7 @@ steps:
   - docker ps -a
 
 - name: runapp
-#  image: registry:5000/conekta/go-ci:main
+  image: registry:5000/conekta/go-ci:main
   image: docker
   privileged: true
   volumes:
@@ -58,9 +58,9 @@ steps:
   commands:
   - sleep 10
   - ls / 
-  - docker ps -a
-  - docker run -d registry:5000/conekta/go-ci:main
-  - docker ps -a
+#  - docker ps -a
+#  - docker run -d registry:5000/conekta/go-ci:main
+#  - docker ps -a
 
 services:
 - name: docker
