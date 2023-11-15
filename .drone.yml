@@ -29,13 +29,13 @@ steps:
     PLUGIN_DRY_RUN: "true"
     PLUGIN_PURGE: "false"
 - name: test
-  image: docker:dind
+  image: conekta/go-ci:main
   volumes:
   - name: dockersock
     path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
-  - docker images
+  - curl localhost:3000
 
 services:
 - name: docker
