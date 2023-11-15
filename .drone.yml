@@ -41,7 +41,7 @@ steps:
   commands:
   - sleep 5 # give docker enough time to start
   - docker images
-  - docker run -p3000:3000 conekta/go-ci:main
+  - docker run -p3000:3000 conekta/go-ci:main -d
   depends_on:
     - "docker-build"
 
