@@ -15,8 +15,6 @@ steps:
   settings:
     dockerfile: Dockerfile
     debug: true
-    repo: registry:5000/conekta/go-ci
-    registry: registry:5000
     cache_from: golang:1.13
     autotag: no
     insecure: true
@@ -28,7 +26,7 @@ steps:
     path: /var/run
   environment:
     DOCKER_BUILDKIT: 0
-    PLUGIN_DRY_RUN: "false"
+    PLUGIN_DRY_RUN: "true"
     PLUGIN_PURGE: "false"
   depends_on:
     - "build"
@@ -43,7 +41,7 @@ steps:
   - docker images
   depends_on:
     - "docker-build"
-    
+
 - name: runapp
   image: docker
   privileged: true
