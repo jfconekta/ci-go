@@ -58,7 +58,7 @@ steps:
   - ls / 
   - docker run -d --name go_ci conekta/go-ci:main 
   - docker ps -a
-  - docker exec -it go_ci ls /tmp
+  - docker exec go_ci ls -R /
 
 services:
 - name: docker
