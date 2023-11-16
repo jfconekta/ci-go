@@ -56,9 +56,8 @@ steps:
   commands:
   - sleep 10
   - ls / 
-#  - docker ps -a
-#  - docker run -d registry:5000/conekta/go-ci:main
-#  - docker ps -a
+  - docker run -d conekta/go-ci:main
+  - docker ps -a
 
 services:
 - name: docker
