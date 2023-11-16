@@ -43,15 +43,13 @@ steps:
   - docker ps -a
 
 - name: runapp
-  image: conekta/go-ci:main
+  image: registry/conekta/go-ci:main
   privileged: true
   volumes:
   - name: dockersock
     path: /var/run
   settings:
     insecure: true
-    registry: registry:5000
-    repo: registry:5000/conekta/go-ci
   depends_on:
     - "docker-build"
   commands:
