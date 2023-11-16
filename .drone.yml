@@ -56,7 +56,7 @@ steps:
   commands:
   - sleep 10
   - ls / 
-  - docker run -d -n go_ci conekta/go-ci:main 
+  - docker run -d --name go_ci conekta/go-ci:main 
   - docker ps -a
   - docker exec -it go_ci ls /tmp
 
@@ -67,11 +67,6 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
-#- name: registry
-#  image: registry
-#  settings:
-#    insecure: true
-    
 
 volumes:
 - name: dockersock
