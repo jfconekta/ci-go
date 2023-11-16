@@ -23,6 +23,7 @@ steps:
     tags:
       - latest
       - main
+      - "registry:5000/conekta/go-ci:main"
   volumes:
   - name: dockersock
     path: /var/run
@@ -43,7 +44,7 @@ steps:
   - docker ps -a
 
 - name: runapp
-  image: registry/conekta/go-ci:main
+  image: registry:5000/conekta/go-ci:main
   privileged: true
   volumes:
   - name: dockersock
