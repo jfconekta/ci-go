@@ -34,16 +34,18 @@ steps:
     - "build"
 
 - name: test
-  image: docker:dind
+  image: docker
   volumes:
   - name: dockersock
     path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
-  - docker ps -a
-
+  - docker images
+  depends_on:
+    - "docker-build"
+    
 - name: runapp
-  image: registry:5000/conekta/go-ci
+  image: docker
   privileged: true
   volumes:
   - name: dockersock
@@ -66,10 +68,10 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
-- name: registry
-  image: registry
-  settings:
-    insecure: true
+#- name: registry
+#  image: registry
+#  settings:
+#    insecure: true
     
 
 volumes:
