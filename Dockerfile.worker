@@ -8,4 +8,4 @@ WORKDIR /app
 RUN go get -u github.com/lib/pq
 RUN go build -o main .
 RUN go build -o mainworker worker/main.go
-ENTRYPOINT ["/app/main"]
+ENTRYPOINT ["/app/mainworker"]

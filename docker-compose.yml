@@ -1,0 +1,27 @@
+version: "3.3"
+
+services: 
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env 
+    environment:
+      DB_DRIVER: "postgres"
+      #DB_USER: "puzzle"
+      #DB_PASSWORD: "puzzl3**"
+      #DB_NAME: "demo"
+      #DB_HOST: "172.17.0.1"
+      #DB_PORT: "5432"
+      #DB_SSLMODE: "disable"
+    container_name: demogo
+  worker:
+    build: 
+      context: .
+      dockerfile: Dockerfile.worker
+    env_file:
+      - .env
+    environment:
+      DB_DRIVER: "postgres"
+    container_name: worker

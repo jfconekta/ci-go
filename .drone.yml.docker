@@ -1,7 +1,7 @@
 ---
 kind: pipeline
-type: kubernetes
 name: default
+
 
 steps:
 - name: build
@@ -17,8 +17,6 @@ steps:
     debug: true
     repo: conekta/go-ci
     cache_from: golang:1.13
-    autotag: no
-    insecure: true
     tags:
       - latest
       - main
@@ -26,39 +24,35 @@ steps:
   - name: dockersock
     path: /var/run
   environment:
+    PLUGIN_SSH_AGENT_KEY:
+      from_secret: SSH_KEY
     DOCKER_BUILDKIT: 0
     PLUGIN_DRY_RUN: "true"
     PLUGIN_PURGE: "false"
   depends_on:
     - "build"
 
-- name: test
-  image: docker
+- name: appgo
+  image: docker:dind
+  privileged: true
   volumes:
   - name: dockersock
     path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
   - docker images
+  - docker run -p3000:3000 conekta/go-ci:main
   depends_on:
     - "docker-build"
+  detach: true
 
-- name: runapp
-  image: docker
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
-  settings:
-    insecure: true
-  depends_on:
-    - "docker-build"
+- name: test
+  image: praqma/network-multitool
   commands:
-  - sleep 10
-  - ls / 
-  - docker run -d --name go_ci conekta/go-ci:main 
-  - docker ps -a
-  - docker exec go_ci ls /
+  - sleep 15 # give docker enough time to start
+  - curl "http://appgo:3000"
+  depends_on:
+    - "appgo"
 
 services:
 - name: docker
@@ -67,6 +61,8 @@ services:
   volumes:
   - name: dockersock
     path: /var/run
+
+
 
 volumes:
 - name: dockersock
