@@ -14,7 +14,7 @@ steps:
     path: /temp
 
 - name: runapp
-  image: index.docker.io/w4nch0/demo2
+  image: w4nch0/demo2
   privileged: true
   volumes:
   - name: dockersock
