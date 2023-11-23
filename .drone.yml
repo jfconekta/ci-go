@@ -13,40 +13,6 @@ steps:
   - name: temporary
     path: /temp
 
-- name: docker-build
-  image: plugins/docker
-  privileged: true
-  settings:
-    dockerfile: Dockerfile
-    debug: true
-    repo: conekta/go-ci
-    cache_from: golang:1.13
-    autotag: no
-    insecure: true
-    tags:
-      - latest
-      - main
-  volumes:
-  - name: dockersock
-    path: /var/run
-  environment:
-    DOCKER_BUILDKIT: 0
-    PLUGIN_DRY_RUN: "true"
-    PLUGIN_PURGE: "false"
-  depends_on:
-    - "build"
-
-- name: test
-  image: docker
-  volumes:
-  - name: dockersock
-    path: /var/run
-  commands:
-  - sleep 5 # give docker enough time to start
-  - docker images
-  depends_on:
-    - "docker-build"
-
 - name: runapp
   image: docker
   privileged: true
@@ -57,15 +23,9 @@ steps:
     path: /temp
   settings:
     insecure: true
-  depends_on:
-    - "docker-build"
   commands:
   - sleep 10
   - cat /temp/file.txt
-  - ls / 
-  - docker run -d --name go_ci conekta/go-ci:main 
-  - docker ps -a
-  - docker exec go_ci ls /
 
 services:
 - name: docker
