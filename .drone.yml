@@ -7,7 +7,7 @@ steps:
 - name: build
   image: golang:1.13
   commands:
-    - "go build -o ./myapp"
+#    - "go build -o ./myapp"
     - echo "hola" > /temp/file.txt
   volumes:
   - name: temporary
