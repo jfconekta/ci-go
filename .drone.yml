@@ -41,6 +41,7 @@ volumes:
 - name: temporary
   temp: {}
 
+
 image_pull_secrets:
 - dockerconfig
 #- DOCKERCONFIG
