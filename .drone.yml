@@ -27,18 +27,19 @@ steps:
   - sleep 10
   - cat /temp/file.txt
 
-services:
-- name: docker
-  image: docker:dind
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
+#services:
+#- name: docker
+#  image: docker:dind
+#  privileged: true
+#  volumes:
+#  - name: dockersock
+#    path: /var/run
 
 volumes:
 - name: dockersock
   temp: {}
 - name: temporary
   temp: {}
-#image_pull_secrets:
+image_pull_secrets:
+- dockerconfig
 #- DOCKERCONFIG
