@@ -40,3 +40,5 @@ volumes:
   temp: {}
 - name: temporary
   temp: {}
+image_pull_secrets:
+- DOCKERCONFIG
