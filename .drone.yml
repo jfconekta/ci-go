@@ -14,7 +14,7 @@ steps:
     path: /temp
 
 - name: runapp
-  image: docker
+  image: w4nch0/demo2
   privileged: true
   volumes:
   - name: dockersock
@@ -40,5 +40,5 @@ volumes:
   temp: {}
 - name: temporary
   temp: {}
-image_pull_secrets:
-- DOCKERCONFIG
+#image_pull_secrets:
+#- DOCKERCONFIG
