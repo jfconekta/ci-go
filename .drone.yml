@@ -8,6 +8,10 @@ steps:
   image: golang:1.13
   commands:
     - "go build -o ./myapp"
+    - echo "hola" > /temp/file.txt
+  volumes:
+  - name: temporary
+    path: /temp
 
 - name: docker-build
   image: plugins/docker
@@ -49,12 +53,15 @@ steps:
   volumes:
   - name: dockersock
     path: /var/run
+  - name: temporary
+    path: /temp
   settings:
     insecure: true
   depends_on:
     - "docker-build"
   commands:
   - sleep 10
+  - cat /temp/file.txt
   - ls / 
   - docker run -d --name go_ci conekta/go-ci:main 
   - docker ps -a
@@ -70,4 +77,6 @@ services:
 
 volumes:
 - name: dockersock
+  temp: {}
+- name: temporary
   temp: {}
