@@ -1,47 +1,13 @@
 ---
 kind: pipeline
-type: docker
+type: kubernetes
 name: default
 
 steps:
 - name: build
   image: golang:1.13
   commands:
-#    - "go build -o ./myapp"
-    - echo "hola" > /temp/file.txt
-  volumes:
-  - name: temporary
-    path: /temp
-
-- name: runapp
-  image: w4nch0/demo2:7a973978-4-4
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
-  - name: temporary
-    path: /temp
-  settings:
-    insecure: true
-  commands:
-  - sleep 10
-  - cat /temp/file.txt
-
-#services:
-#- name: docker
-#  image: docker:dind
-#  privileged: true
-#  volumes:
-#  - name: dockersock
-#    path: /var/run
-
-volumes:
-- name: dockersock
-  temp: {}
-- name: temporary
-  temp: {}
-
+    - cat random.txt
 
 image_pull_secrets:
 - dockerconfig
-#- DOCKERCONFIG
