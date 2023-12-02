@@ -1,13 +1,12 @@
----
 kind: pipeline
 type: kubernetes
 name: default
 
 steps:
-- name: build
-  image: golang:1.13
+- name: test
+  image: alpine
   commands:
-    - cat random.txt
-
-image_pull_secrets:
-- dockerconfig
+  - cat random.txt
+  logging:
+   options:
+   - max-size: "15Mb"
