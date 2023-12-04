@@ -3,7 +3,7 @@ type: kubernetes
 # resource requests are defined on the pipeline level
 resources:
   requests:
-    cpu: 8
+    cpu: 8000
     memory: 32GiB
 steps:
   - name: en
@@ -13,7 +13,7 @@ steps:
     resources:
       # resource limits are defined for each step
       limits:
-        cpu: 6
+        cpu: 6000
         memory: 24GiB
 
   - name: es
