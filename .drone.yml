@@ -3,18 +3,13 @@ type: kubernetes
 # resource requests are defined on the pipeline level
 resources:
   requests:
-    cpu: 2
-    memory: 16GiB
+    cpu: 16
+    memory: 32GiB
 steps:
   - name: en
     image: alpine
     commands:
       - echo hello
-    resources:
-      # resource limits are defined for each step
-      limits:
-        cpu: 2
-        memory: 16GiB
 
   - name: es
     image: alpine
