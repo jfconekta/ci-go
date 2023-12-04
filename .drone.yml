@@ -3,8 +3,8 @@ type: docker
 name: default
 resources:
   requests:
-    cpu: 2000
-    memory: 2000MiB
+    cpu: 8000
+    memory: 32000MiB
 steps:
 - name: test
   image: alpine
