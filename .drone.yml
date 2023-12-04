@@ -1,12 +1,17 @@
 kind: pipeline
 type: docker
 name: default
-
+resources:
+  requests:
+    cpu: 2000
+    memory: 2000MiB
 steps:
 - name: test
   image: alpine
   commands:
-  - cat random.txt
+  - free
+  - cat /proc/cpuinfo
+  - cat /proc/meminfo
   logging:
    options:
    - max-size: "15Mb"
