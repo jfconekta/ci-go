@@ -3,8 +3,8 @@ type: kubernetes
 # resource requests are defined on the pipeline level
 resources:
   requests:
-    cpu: 8000
-    memory: 30GiB
+    cpu: 16000
+    memory: 32GiB
 steps:
   - name: en
     image: alpine
@@ -13,7 +13,7 @@ steps:
     resources:
       # resource limits are defined for each step
       limits:
-        cpu: 6000
+        cpu: 8000
         memory: 24GiB
 
   - name: es
