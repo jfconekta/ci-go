@@ -1,6 +1,5 @@
 kind: pipeline
 type: kubernetes
-
 # resource requests are defined on the pipeline level
 resources:
   requests:
