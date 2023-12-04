@@ -4,7 +4,7 @@ type: kubernetes
 resources:
   requests:
     cpu: 4000
-    memory: 4GiB
+    memory: 8GiB
 steps:
   - name: en
     image: alpine
@@ -22,3 +22,5 @@ steps:
       - echo bonjour
       - cat /proc/cpuinfo
       - free
+image_pull_secrets: 
+- DOCKERCONFIG
