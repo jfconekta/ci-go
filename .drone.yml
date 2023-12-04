@@ -12,4 +12,4 @@ steps:
   - free
   - cat /proc/cpuinfo
   - cat /proc/meminfo
-
+  - head random.txt
