@@ -12,6 +12,3 @@ steps:
   - free
   - cat /proc/cpuinfo
   - cat /proc/meminfo
-  logging:
-   options:
-   - max-size: "15Mb"
