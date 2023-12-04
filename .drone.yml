@@ -1,10 +1,10 @@
 kind: pipeline
-type: docker
+type: kube
 name: default
-resources:
-  requests:
-    cpu: 8000
-    memory: 32000MiB
+#resources:
+#  requests:
+#    cpu: 8000
+#    memory: 32000MiB
 steps:
 - name: test
   image: alpine
@@ -12,3 +12,4 @@ steps:
   - free
   - cat /proc/cpuinfo
   - cat /proc/meminfo
+
