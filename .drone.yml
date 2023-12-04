@@ -1,5 +1,5 @@
 kind: pipeline
-type: kube
+type: kubernetes
 name: default
 #resources:
 #  requests:
