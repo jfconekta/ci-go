@@ -4,7 +4,7 @@ type: kubernetes
 resources:
   requests:
     cpu: 8000
-    memory: 12GiB
+    memory: 24GiB
 steps:
   - name: en
     image: alpine
