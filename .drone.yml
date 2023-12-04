@@ -1,15 +1,31 @@
 kind: pipeline
 type: kubernetes
-name: default
-#resources:
-#  requests:
-#    cpu: 8000
-#    memory: 32000MiB
+
+# resource requests are defined on the pipeline level
+resources:
+  requests:
+    cpu: 2000
+    memory: 2000MiB
+
 steps:
-- name: test
-  image: alpine
-  commands:
-  - free
-  - cat /proc/cpuinfo
-  - cat /proc/meminfo
-  - head random.txt
+  - name: en
+    image: alpine
+    commands:
+      - echo hello
+    resources:
+      # resource limits are defined for each step
+      limits:
+        cpu: 1000
+        memory: 1000MiB
+
+  - name: es
+    image: alpine
+    commands:
+      - echo hola
+
+  - name: fr
+    image: alpine
+    commands:
+      - echo bonjour
+      - cat /proc/cpuinfo
+      - free
