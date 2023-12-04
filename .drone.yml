@@ -3,8 +3,8 @@ type: kubernetes
 # resource requests are defined on the pipeline level
 resources:
   requests:
-    cpu: 8000m
-    memory: 16GiB
+    cpu: 4000
+    memory: 4GiB
 steps:
   - name: en
     image: alpine
